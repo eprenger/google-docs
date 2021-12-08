@@ -14,6 +14,15 @@ function Login() {
         width="500"
         src="https://links/papareact.com/1ui"
       />
+      <Button
+        className="w-44 mt-10"
+        color="blue"
+        button-type="filled"
+        ripple="light"
+        onClick={signIn}
+      >
+        Login
+      </Button>
     </div>
   );
 }

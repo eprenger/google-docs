@@ -1,5 +1,5 @@
 import NextAuth from "next-auth";
-import Providers from "next-auth/providers/";
+import Providers from "next-auth/providers/Google";
 import { db } from "../../../firebase";
 
 export default NextAuth({

@@ -1,6 +1,6 @@
 import Button from "@material-tailwind/react/Button";
 import Image from "next/image";
-import { signIn } from "next-auth/react";
+import { signIn } from "next-auth/client";
 
 function Login() {
   return (
@@ -12,7 +12,7 @@ function Login() {
         objectFit="contain"
         height="300"
         width="500"
-        src="https://links/papareact.com/1ui"
+        src="https://links.papareact.com/1ui"
       />
       <Button
         className="w-44 mt-10"

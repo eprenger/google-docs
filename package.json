@@ -9,7 +9,8 @@
     "@material-tailwind/react": "0.3.4",
     "firebase": "^9.6.0",
     "next": "latest",
-    "next-auth": "^4.0.2",
+    "next-auth": "^4.0.0-beta.7",
+    "next-auth-client": "^1.5.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },

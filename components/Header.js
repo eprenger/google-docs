@@ -1,7 +1,9 @@
 import Button from "@material-tailwind/react/Button";
 import Icon from "@material-tailwind/react/Icon";
+import { useSession } from "next-auth/client";
 
 function Header() {
+  const [session] = useSession();
   return (
     <div
       className="sticky top-0  z-50 flex items-center 
@@ -53,8 +55,8 @@ function Header() {
       <img
         loading="lazy"
         onClick=""
-        className="cursor-pointer h-12 w-12 rounded-full ml-2"
-        src="{}"
+        className="cursor-pointer h-10 w-10 rounded-full ml-2"
+        src={session?.user?.image}
         alt=""
       />
     </div>

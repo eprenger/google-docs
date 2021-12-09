@@ -34,10 +34,14 @@ export default function Home() {
   const createDocument = () => {
     if (!input) return;
 
-    db.collection("userDocs").doc(session.user.email).collection("docs").add({
-      filename: input,
-      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-    });
+    db.collection("userDocs")
+      .doc(session.user.email)
+      .collection("docs")
+      .add({
+        fileName: input,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      })
+      .then((doc) => router.push(`/doc/${doc.id}`));
 
     setInput("");
     setShowModal(false);
@@ -122,7 +126,7 @@ export default function Home() {
             <DocumentRow
               key={doc.id}
               id={doc.id}
-              fileName={doc.data().fileName}
+              fileName={doc.data().filename}
               date={doc.data().timestamp}
             />
           ))}

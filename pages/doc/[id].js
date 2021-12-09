@@ -8,7 +8,6 @@ import { getSession, signOut, useSession } from "next-auth/client";
 import Login from "../../components/Login";
 
 export default function Doc() {
-<<<<<<< HEAD
   const [session, loading] = useSession();
   console.log(session);
   if (!session) return <Login />;
@@ -20,19 +19,19 @@ export default function Doc() {
   );
 
   // Redirect if user tries to access a URL they do not have access to...
-  if (!loadingSnapshot && !snapshot?.data()?.fileName) {
+  if (!loadingSnapshot && !snapshot?.data()?.filename) {
     // Filename will not be present if the user doesnt have access...
     router.replace("/");
   }
-
   return (
     <div>
-      <header className="flex justify-between items-center p-3 pb-1">
-        <span onClick={() => router.push("/")} className="cursor-pointer">
+      <header className="flex justify-between items-center p-3">
+        <span className="cursor-pointer" onClick={() => router.push("/")}>
           <Icon name="description" size="5xl" color="blue" />
         </span>
+
         <div className="flex-grow px-2">
-          <h2 className="text-lg text-left">{snapshot?.data()?.fileName}</h2>
+          <h2 className="text-lg text-left">{snapshot?.data()?.filename}</h2>
           <div className="flex items-center text-sm -ml-1 h-8 text-gray-600 space-x-1">
             <p className="option">File</p>
             <p className="option">Edit</p>
@@ -53,26 +52,15 @@ export default function Doc() {
           iconOnly={false}
           ripple="light"
         >
-          <Icon name="people" size="md" /> SHARE
+          <Icon name="people" size="md" />
+          SHARE
         </Button>
-
         <img
           onClick={signOut}
           className="cursor-pointer h-10 w-10 rounded-full ml-2"
           src={session.user.image}
           alt=""
         />
-=======
-  const [session] = useSession();
-  const router = useRouter();
-  if (!session) return <Login />;
-  return (
-    <div>
-      <header className="flex justify-between items-center p-3">
-        <span onClick={() => router.push("/")}>
-          <Icon name="description" size="5xl" color="blue" />
-        </span>
->>>>>>> parent of 3be363b (updates)
       </header>
       {/* <TextEditor /> */}
     </div>

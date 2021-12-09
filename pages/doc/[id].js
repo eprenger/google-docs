@@ -8,6 +8,7 @@ import { getSession, signOut, useSession } from "next-auth/client";
 import Login from "../../components/Login";
 
 export default function Doc() {
+<<<<<<< HEAD
   const [session, loading] = useSession();
   console.log(session);
   if (!session) return <Login />;
@@ -61,6 +62,17 @@ export default function Doc() {
           src={session.user.image}
           alt=""
         />
+=======
+  const [session] = useSession();
+  const router = useRouter();
+  if (!session) return <Login />;
+  return (
+    <div>
+      <header className="flex justify-between items-center p-3">
+        <span onClick={() => router.push("/")}>
+          <Icon name="description" size="5xl" color="blue" />
+        </span>
+>>>>>>> parent of 3be363b (updates)
       </header>
       {/* <TextEditor /> */}
     </div>

@@ -1,22 +1,39 @@
+import { useState } from "react";
 import Head from "next/head";
 import Header from "../components/Header";
-import Button from "@material-tailwind/react/Button";
 import Icon from "@material-tailwind/react/Icon";
+import Button from "@material-tailwind/react/Button";
 import Image from "next/image";
-import { useSession, getSession } from "next-auth/client";
+import Modal from "@material-tailwind/react/Modal";
+import ModalBody from "@material-tailwind/react/ModalBody";
+import ModalFooter from "@material-tailwind/react/ModalFooter";
+import { db } from "../firebase";
+import firebase from "firebase";
+import { useRouter } from "next/dist/client/router";
+import {
+  useCollection,
+  useCollectionOnce,
+} from "react-firebase-hooks/firestore";
+import { getSession, useSession } from "next-auth/client";
 import Login from "../components/Login";
-import { Modal } from "@material-tailwind/react/Modal";
-import { ModalBody } from "@material-tailwind/react/ModalBody";
-import { ModalFooter } from "@material-tailwind/react/ModalFooter";
-import { useState } from "react";
 
 export default function Home() {
   const [session] = useSession();
+  if (!session) return <Login />;
   const [showModal, setShowModal] = useState(false);
   const [input, setInput] = useState("");
 
-  if (!session) return <Login />;
-  const createDocument = () => {};
+  const createDocument = () => {
+    if (!input) return;
+
+    db.collection("userDocs").doc(session.user.email).collection("docs").add({
+      filename: input,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+    });
+
+    setInput(input);
+    setShowModal(false);
+  };
   const modal = (
     <Modal size="sm" active={showModal} toggler={() => setShowModal(false)}>
       <ModalBody>
@@ -72,6 +89,7 @@ export default function Home() {
           </div>
           <div>
             <div
+              onClick={() => setShowModal(true)}
               className="relative h-52 w-40 border-2 cursor-pointer
             hover:border-blue-500"
             >

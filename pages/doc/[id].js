@@ -19,10 +19,10 @@ export default function Doc() {
   );
 
   // Redirect if user tries to access a URL they do not have access to...
-  if (!loadingSnapshot && !snapshot?.data()?.filename) {
-    // Filename will not be present if the user doesnt have access...
-    router.replace("/");
-  }
+  // if (!loadingSnapshot && !snapshot?.data()?.filename) {
+  //   // Filename will not be present if the user doesnt have access...
+  //   router.replace("/");
+  // }
   return (
     <div>
       <header className="flex justify-between items-center p-3">

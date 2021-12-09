@@ -16,12 +16,20 @@ import {
 } from "react-firebase-hooks/firestore";
 import { getSession, useSession } from "next-auth/client";
 import Login from "../components/Login";
+import DocumentRow from "../components/DocumentRow";
 
 export default function Home() {
   const [session] = useSession();
   if (!session) return <Login />;
   const [showModal, setShowModal] = useState(false);
   const [input, setInput] = useState("");
+  const [snapshot] = useCollectionOnce(
+    db
+      .collection("userDocs")
+      .doc(session.user.email)
+      .collection("docs")
+      .orderBy("timestamp", "desc")
+  );
 
   const createDocument = () => {
     if (!input) return;
@@ -31,7 +39,7 @@ export default function Home() {
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
     });
 
-    setInput(input);
+    setInput("");
     setShowModal(false);
   };
   const modal = (
@@ -109,6 +117,15 @@ export default function Home() {
             <p className="mr-12">Date Created</p>
             <Icon name="folder" size="3xl" color="gray" />
           </div>
+
+          {snapshot?.docs.map((doc) => (
+            <DocumentRow
+              key={doc.id}
+              id={doc.id}
+              fileName={doc.data().fileName}
+              date={doc.data().timestamp}
+            />
+          ))}
         </div>
       </section>
     </div>

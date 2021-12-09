@@ -1,4 +1,4 @@
-import TextEditor from "../../components/TextEditor";
+//import TextEditor from "../../components/TextEditor";
 import Button from "@material-tailwind/react/Button";
 import Icon from "@material-tailwind/react/Icon";
 import { useRouter } from "next/dist/client/router";
@@ -62,7 +62,7 @@ export default function Doc() {
           alt=""
         />
       </header>
-      <TextEditor />
+      {/* <TextEditor /> */}
     </div>
   );
 }

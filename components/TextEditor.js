@@ -62,3 +62,5 @@ export default function TextEditor() {
     </div>
   );
 }
+
+// ADD DEBOUNCE TO LOWER READS AND WRITES

@@ -23,6 +23,7 @@ export default function Home() {
   if (!session) return <Login />;
   const [showModal, setShowModal] = useState(false);
   const [input, setInput] = useState("");
+  const router = useRouter();
   const [snapshot] = useCollectionOnce(
     db
       .collection("userDocs")
@@ -38,7 +39,7 @@ export default function Home() {
       .doc(session.user.email)
       .collection("docs")
       .add({
-        fileName: input,
+        filename: input,
         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
       })
       .then((doc) => router.push(`/doc/${doc.id}`));
